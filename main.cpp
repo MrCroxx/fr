@@ -65,33 +65,26 @@ float FaceCompare(const std::string path_src, const std::string path_dst) {
     faceIdentification.ExtractFeature(img_data_src, feats_src);
     faceIdentification.ExtractFeature(img_data_dst, feats_dst);
 
-    /*
-    cv::imshow("crop1",mat_src_crop);
-    cv::imshow("crop2",mat_dst_crop);
-    cv::waitKey(0);
-     */
-
     float sim = faceIdentification.CalcSimilarity(feats_src, feats_dst);
 
     return sim;
 
 }
 
-float VoiceCompare(){
 
+int main(int argc, char *argv[]) {
 
+    string hint = "Compute similarity of two faces.(returns similarity between(0-1))\n";
+    hint += "Usage:\n";
+    hint += "    fr <path-to-face-jpg-src> <path-to-face-jpg-dst>\n";
 
-    return 0.0;
-}
-
-
-
-
-
-
-
-int main(int argc,char *argv[]) {
-    std::cout << FaceCompare("/home/croxx/data/face5.jpg", "/home/croxx/data/face6.jpg") << std::endl;
+    if (argc != 3) {
+        std::cout << hint;
+        return 0;
+    }
+    string path_src = argv[1];
+    string path_dst = argv[2];
+    std::cout << FaceCompare(path_src,path_dst) << std::endl;
     return 0;
 }
 
